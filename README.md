@@ -15,9 +15,11 @@ In the file written, each line contains a timestamp (in yyyy-mm- ddThh:mm:ss for
 2021-12-01T15:00:00 9<br/>
 2021-12-01T15:30:00 11
 
+### Solution purposed
+
 This repo implements some methods to do some analysis on this file provided by automatic traffic counter in the format as shown above.
 
-`utils/traffic_counter.py` is the main file containing TrafficCounter class to implement the functionality as asked. It is written as an independent class that is modular and can be reused and extended for different purposes.
+`utils/traffic_counter.py` is the main file containing TrafficCounter class to implement the functionality as asked. It is written as an independent class that is modular enough to write the test cases around each method and can be reused and extended for different purposes.
 
 ### Functionality implemented
 * The number of cars seen in total
@@ -27,10 +29,12 @@ number of cars seen on that day (eg. 2016-11-23 289) for all days listed in the 
 * The 1.5 hour period with least cars (i.e. 3 contiguous half hour records)
 
 ### Assumption 
-* filename passed is always valid filename and file exist with some records
+* Filename passed is always valid filename and file exist with some records.
+* Assuming clean input, as these files are machine-generated.
+* Every method has enough detail to cover the major decision taken and how it can be used. Documentaion is written in a way that API in html can be generated using third party tools like pydoc if needed.
 
 ###  Requirements
-To run the code, you should have python ^3.6 version and this repo uses no third party depenencies as restricted by the coding challenge.
+To run the code, you should have python installed and this repo uses no third party depenencies as restricted by the coding challenge.
 
 ### Run the files
 

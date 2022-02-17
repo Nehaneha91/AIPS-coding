@@ -72,21 +72,18 @@ class TrafficCounter:
         this was a bit trciky due to below reasons based on 1.5 hours period
         -  assumption -  sometime machine can break and it misses some records
            solution opted - put a condition to filter records that are continuous
-        -  ask - to display 1.5 hours period of least car but 3 intervals will have \
-        gap of 1 hour as we are recording the start time of half hour
-           solution opted - to display continuous nicely, period outputted will have start time \
-           of first interval and end time of last interval
+        -  assuming maximum cars seen in half an hour won't be more than 999999
         """
         date_time_stamps = sorted(self.traffic_counter.keys())
-        cont_period_count = {}
-
+        least_cars_dict = {}
+        least_cars_seen = 999999
         for i in range(len(date_time_stamps) - n + 1):
             cont_keys = date_time_stamps[i : i + n]
             if cont_keys[-1] == cont_keys[0] + timedelta(hours=1):
-                count = sum([self.traffic_counter[key] for key in cont_keys])
-                period_key = "{} - {}".format(
-                    cont_keys[0], cont_keys[-1] + timedelta(hours=0.5)
-                )
-                cont_period_count[period_key] = count
-
-        return min(cont_period_count.items(), key=lambda x: x[1])
+                car_count = sum([self.traffic_counter[key] for key in cont_keys])
+                if car_count < least_cars_seen:
+                    least_cars_seen = car_count
+                    least_cars_dict = {
+                        key: self.traffic_counter[key] for key in cont_keys
+                    }
+        return least_cars_dict

@@ -37,9 +37,10 @@ def get_traffic_analytics():
         print("{} {}".format(date_time, count))
 
     print("\n*****************************************")
-    print("The 1.5 hour period with least cars - ")
-    period, count = traffic_counter.least_cars_period(3)
-    print("{} has least car count which is = {}".format(period, count))
+    least_cars_period = traffic_counter.least_cars_period(3)
+    print("Below is the least cars period for 3 continuous half hour records - ")
+    for date_time, count in least_cars_period.items():
+        print("{} {}".format(date_time, count))
 
 
 if __name__ == "__main__":

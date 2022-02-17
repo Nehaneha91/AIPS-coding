@@ -47,8 +47,12 @@ class TestTrafficCounterMethods(unittest.TestCase):
         Testing the 1.5 hour period with least cars is as expected
         """
         traffic_counter = TrafficCounter(test_filename)
-        expected_tuple = ("2021-12-02 05:00:00 - 2021-12-02 06:30:00", 11)
-        self.assertEqual(expected_tuple, traffic_counter.least_cars_period(3))
+        expected_dict = {
+            datetime.fromisoformat("2021-12-02 05:00:00"): 5,
+            datetime.fromisoformat("2021-12-02 05:30:00"): 2,
+            datetime.fromisoformat("2021-12-02 06:00:00"): 4,
+        }
+        self.assertEqual(expected_dict, traffic_counter.least_cars_period(3))
 
 
 if __name__ == "__main__":
