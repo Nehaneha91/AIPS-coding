@@ -27,7 +27,7 @@ class TrafficCounter:
 
     def _read_file(self) -> None:
         """
-        Its a private method that is called to initlaise traffic counter
+        Its a private method that is called to initialise traffic counter
         it reads the file and convert the record into dictionary
         it takes care of data type conversion for further analysis
         """
@@ -41,15 +41,15 @@ class TrafficCounter:
     def total_cars_seen(self) -> int:
         """
         counts the total cars seen in the whole file
-        return the count as an int value
+        returns the count as an int value
         """
         return sum(self.traffic_counter.values())
 
     def daily_car_seen(self) -> Dict[datetime, int]:
         """
         This method counts the car seen in a day
-        It saves the output in a dictionary where \
-        a key represents a day and value corresponds to the car seen
+        It saves and returns the output in a dictionary where \
+        a key represents a day and value corresponds to the cars seen
         """
         daily_traffic = {}
         for date_time, count in self.traffic_counter.items():
@@ -59,14 +59,14 @@ class TrafficCounter:
             daily_traffic[day] += count
         return daily_traffic
 
-    def top_half_hours(self, n) -> Dict[datetime, int]:
+    def top_half_hours(self, n: int) -> Dict[datetime, int]:
         """
         This method return the top n half hours where the car count is maximum
         """
         cars_counter = Counter(self.traffic_counter)
         return dict(cars_counter.most_common(n))
 
-    def least_cars_period(self, n) -> Tuple[str, int]:
+    def least_cars_period(self, n: int) -> Tuple[str, int]:
         """
         This method return the least car seen in a continuous period of n intervals
         this was a bit trciky due to below reasons based on 1.5 hours period

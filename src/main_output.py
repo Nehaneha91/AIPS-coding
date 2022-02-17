@@ -34,13 +34,16 @@ def get_traffic_analytics():
     print("top 3 half hours car seen is as below - ")
     top_3_half_hours = traffic_counter.top_half_hours(3)
     for date_time, count in top_3_half_hours.items():
-        print("{} {}".format(date_time, count))
+        print("{} {}".format(date_time.isoformat(), count))
 
     print("\n*****************************************")
     least_cars_period = traffic_counter.least_cars_period(3)
-    print("Below is the least cars period for 3 continuous half hour records - ")
-    for date_time, count in least_cars_period.items():
-        print("{} {}".format(date_time, count))
+    if least_cars_period:
+        print("Below is the least cars period for 3 continuous half hour records - ")
+        for date_time, count in least_cars_period.items():
+            print("{} {}".format(date_time.isoformat(), count))
+    else:
+        print("file doesn't have even one set of 3 continuous half hour records")
 
 
 if __name__ == "__main__":
