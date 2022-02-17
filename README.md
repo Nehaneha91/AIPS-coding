@@ -31,7 +31,14 @@ number of cars seen on that day (eg. 2016-11-23 289) for all days listed in the 
 ### Assumption 
 * Filename passed is always valid filename and file exist with some records.
 * Assuming clean input, as these files are machine-generated.
-* Every method has enough detail to cover the major decision taken and how it can be used. Documentaion is written in a way that API in html can be generated using third party tools like `pydoc` if needed.
+* Every method has enough detail to cover the major decision taken and how it can be used. 
+
+### Optional
+Documentaion is written in a way that API in html can be generated using third party tools like `pydoc` if needed.
+* Installation:
+`pip install pdoc3`
+* Usage (inside your Python project):
+`pdoc --html utils/traffic_counter.py`
 
 ###  Requirements
 To run the code, you should have python installed and this repo uses no third party depenencies as restricted by the coding challenge.

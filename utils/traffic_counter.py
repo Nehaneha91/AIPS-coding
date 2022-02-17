@@ -66,22 +66,25 @@ class TrafficCounter:
         cars_counter = Counter(self.traffic_counter)
         return dict(cars_counter.most_common(n))
 
-    def least_cars_period(self, n: int) -> Tuple[str, int]:
+    def least_cars_period(self, n: int) -> Dict[datetime, int]:
         """
         This method return the least car seen in a continuous period of n intervals
         this was a bit trciky due to below reasons based on 1.5 hours period
         -  assumption -  sometime machine can break and it misses some records
            solution opted - put a condition to filter records that are continuous
-        -  assuming maximum cars seen in half an hour won't be more than 999999
         """
         date_time_stamps = sorted(self.traffic_counter.keys())
+
+        # could have used only the dict and recalculate the least car seen from there
+        # but it will require recalculation of least car seen for every iteration
+        # so used simple way to keep the least_cars_seen variable
         least_cars_dict = {}
-        least_cars_seen = 999999
+        least_cars_seen = -1
         for i in range(len(date_time_stamps) - n + 1):
             cont_keys = date_time_stamps[i : i + n]
             if cont_keys[-1] == cont_keys[0] + timedelta(hours=1):
                 car_count = sum([self.traffic_counter[key] for key in cont_keys])
-                if car_count < least_cars_seen:
+                if least_cars_seen == -1 or car_count < least_cars_seen:
                     least_cars_seen = car_count
                     least_cars_dict = {
                         key: self.traffic_counter[key] for key in cont_keys
